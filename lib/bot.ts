@@ -13,7 +13,7 @@ interface TelegramMessage {
 export const sendMessage = async (messageObj: TelegramMessage, text: string) => {
     try {
         console.log('Sending message:', { chatId: messageObj.chat.id, text });
-        const response = await telegramApi.get('sendMessage', {
+        const response = await telegramApi.post('sendMessage', {
             chat_id: messageObj.chat.id,
             text: text,
         });
