@@ -2,20 +2,11 @@ import { sendMessage } from '@/lib/bot';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-interface TelegramMessage {
-    chat: {
-        id: number;
-    };
-    text?: string;
-}
 
-interface TelegramUpdate {
-    message?: TelegramMessage;
-}
 
 export async function POST(request: NextRequest) {
     try {
-        const body: TelegramUpdate = await request.json();
+        const body = await request.json();
         console.log('Received Telegram update:', JSON.stringify(body, null, 2));
 
         const { message } = body;
