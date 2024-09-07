@@ -9,12 +9,13 @@ export async function POST(request: NextRequest) {
 
         // Extract important data from the Telegram update
         const { message } = body;
+        console.log(body.message)
 
         if (message) {
             const chatId = message.chat.id;
             const text = message.text || "";
 
-            if (text.charAt(0) === "/") {
+            if (text.charAt(0) === "/" && chatId) {
                 const command = text.substr(1);
 
                 switch (command) {
