@@ -1,20 +1,32 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
+
+// Ensure the bot token is available
+if (!process.env.TELEGRAM_BOT_TOKEN) {
+    throw new Error("TELEGRAM_BOT_TOKEN is not set in environment variables");
+}
 
 // Base URL including the bot token
 const BASE_URL = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}`;
 
-const axiosInstance = () => {
-    return {
-        get(method: string, params: any) {
-            return axios.get(`${BASE_URL}/${method}`, {
-                params: params, // Passing query parameters
-            });
-        },
-        post(method: string, data: any) {
-            return axios.post(`${BASE_URL}/${method}`, data); // Post request with data payload
-        },
-    };
+// Create a typed axios instance
+const axiosInstance: AxiosInstance = axios.create({
+    baseURL: BASE_URL,
+});
+
+// Define a type for the methods
+type TelegramMethod =
+    | "getMe"
+    | "sendMessage"
+    | "setWebhook"
+// Add more method names as needed
+
+// Create a wrapper for the axios instance
+const telegramApi = {
+    get: <T = any>(method: TelegramMethod, params?: any) =>
+        axiosInstance.get<T>(`/${method}`, { params }),
+
+    post: <T = any>(method: TelegramMethod, data?: any) =>
+        axiosInstance.post<T>(`/${method}`, data),
 };
 
-// Exporting the axios instance functions
-export default axiosInstance;
+export default telegramApi;

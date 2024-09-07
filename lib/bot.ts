@@ -1,6 +1,4 @@
-import axiosInstance from "./axios";
-
-const telegramApi = axiosInstance()
+import telegramApi from "./axios";
 export const  sendMessage = async (messageObj: any, text: string) => {
 
     return telegramApi.get('sendMessage', {
