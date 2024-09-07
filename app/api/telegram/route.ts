@@ -22,10 +22,10 @@ export async function POST(request: NextRequest) {
                 try {
                     switch (command) {
                         case "start":
-                            await sendMessage(chatId, "Hi! I am here to help you 🥰");
+                            await sendMessage(message, "Hi! I am here to help you 🥰");
                             break;
                         default:
-                            await sendMessage(chatId, "Invalid command");
+                            await sendMessage(message, "Invalid command");
                     }
                 } catch (sendError) {
                     console.error('Error sending message:', sendError);
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
                 }
             } else {
                 try {
-                    await sendMessage(chatId, text);
+                    await sendMessage(message, text);
                 } catch (sendError) {
                     console.error('Error sending message:', sendError);
                     return NextResponse.json({ error: 'Error sending message' }, { status: 500 });
