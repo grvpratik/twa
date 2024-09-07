@@ -1,6 +1,7 @@
 'use client'
+import { Button } from '@/components/ui/button'
 import { useTelegram } from '@/provider/telegram-provider'
-import { Button } from '@telegram-apps/telegram-ui'
+
 import React from 'react'
 
 const HomePage = () => {
@@ -18,8 +19,7 @@ const HomePage = () => {
           Eniter Web App data:
           {/* <pre>{JSON.stringify(webApp, null, 2)}</pre> */}
           <Button
-            mode="filled"
-            size="s"
+            
             className=' mx-5 p-2'
           >
             Action
@@ -27,8 +27,7 @@ const HomePage = () => {
         </div>
       ) : (
         <div>Make sure web app is opened from telegram client <Button
-          mode="filled"
-          size="s"
+        
         >
           Action
         </Button></div>
