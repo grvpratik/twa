@@ -39,9 +39,9 @@ export const TelegramProvider = ({
 
   return (
     <TelegramContext.Provider value={value}>
-      <AppRoot>
+      {/* <AppRoot> */}
         {children}
-      </AppRoot>
+      {/* </AppRoot> */}
     </TelegramContext.Provider>
   );
 };

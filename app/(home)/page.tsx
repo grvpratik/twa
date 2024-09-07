@@ -17,7 +17,7 @@ const HomePage = () => {
           User data:
           <pre>{JSON.stringify(user, null, 2)}</pre>
           Eniter Web App data:
-          {/* <pre>{JSON.stringify(webApp, null, 2)}</pre> */}
+          <pre>{JSON.stringify(webApp, null, 2)}</pre>
           <Button
             
             className=' mx-5 p-2'
