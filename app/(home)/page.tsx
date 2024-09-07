@@ -1,13 +1,20 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import { useTelegram } from '@/provider/telegram-provider'
+import { useTelegramTheme } from '@/provider/telegram-theme'
+import { useTheme } from 'next-themes'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const HomePage = () => {
   const { user, webApp } = useTelegram()
   console.log(webApp)
+  const { setTheme } = useTheme()
+  const telegramTheme = useTelegramTheme()
 
+  useEffect(() => {
+    setTheme(telegramTheme)
+  }, [telegramTheme, setTheme])
 
   return (
     <div>
