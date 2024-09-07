@@ -1,6 +1,7 @@
 'use client'
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import type { ITelegramUser, IWebApp } from "@/types/telegram";
+import { AppRoot } from "@telegram-apps/telegram-ui";
 
 export interface ITelegramContext {
   webApp?: IWebApp;
@@ -27,16 +28,17 @@ export const TelegramProvider = ({
   const value = useMemo(() => {
     return webApp
       ? {
-          webApp,
-          unsafeData: webApp.initDataUnsafe,
-          user: webApp.initDataUnsafe.user,
-        }
+        webApp,
+        unsafeData: webApp.initDataUnsafe,
+        user: webApp.initDataUnsafe.user,
+      }
       : {};
   }, [webApp]);
 
   return (
     <TelegramContext.Provider value={value}>
-          {children}
+      <AppRoot>
+        {children}</AppRoot>
     </TelegramContext.Provider>
   );
 };
