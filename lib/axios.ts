@@ -22,11 +22,16 @@ type TelegramMethod =
 
 // Create a wrapper for the axios instance
 const telegramApi = {
-    get: <T = any>(method: TelegramMethod, params?: any) =>
-        axiosInstance.get<T>(`/${method}`, { params }),
+    get: async <T = any>(method: TelegramMethod, params?: any) =>
+      await  axiosInstance.get<T>(`/${method}`, { params }),
 
-    post: <T = any>(method: TelegramMethod, data?: any) =>
-        axiosInstance.post<T>(`/${method}`, data),
+    post:async <T = any>(method: TelegramMethod, data?: any) =>
+        await axios({
+            method: "post",
+            baseURL: BASE_URL,
+            url: `/${method}`,
+            data,
+       }),
 };
 
 export default telegramApi;

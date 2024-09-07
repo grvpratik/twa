@@ -14,6 +14,8 @@ export async function POST(request: NextRequest) {
         if (message) {
             const chatId = message.chat.id;
             const text = message.text || "";
+            console.log({chatId})
+            console.log({text})
 
             if (text.charAt(0) === "/" && chatId) {
                 const command = text.substr(1);
