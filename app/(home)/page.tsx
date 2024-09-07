@@ -1,5 +1,5 @@
 'use client'
-import { useTelegram } from '@/lib/telegram-provider'
+import { useTelegram } from '@/provider/telegram-provider'
 import React from 'react'
 
 const HomePage = () => {

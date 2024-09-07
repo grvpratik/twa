@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import Script from "next/script";
-import { TelegramProvider } from "@/lib/telegram-provider";
+import { TelegramProvider } from "@/provider/telegram-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -1,6 +1,8 @@
-// app/api/telegram/route.ts
+
+import { sendMessage } from '@/lib/bot';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,12 +12,28 @@ export async function POST(request: NextRequest) {
     // Extract important data from the Telegram update
     const { message } = body;
 
-    if (message) {
+      if (message) {
+        console.log(message)
       const chatId = message.chat.id;
-      const text = message.text;
+          const text = message.text || "";
+          if (text.charAt(0) === "/") {
 
-      // Handle the message (e.g., reply to the user)
-      console.log(`Received message from chat ${chatId}: ${text}`);
+                  const command = text.substr(1);
+                  switch (command) {
+                      case "start":
+                          return sendMessage(message, "Hi! i am how can i help you 🥰")
+                      default:
+                          return sendMessage(message, "Invalid command ")
+
+
+                  }
+              } else {
+                  return sendMessage(message, text)
+              }
+
+          }
+
+      
 
       // Here you could call the Telegram API to send a response back, e.g., via fetch
 
@@ -23,11 +41,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ status: 'ok' }, { status: 200 });
     }
 
-    // If there's no message in the update, return a bad request response
-    return NextResponse.json({ error: 'No message received' }, { status: 400 });
+ 
 
-  } catch (error) {
+   catch (error) {
     console.error('Error processing Telegram update:', error);
     return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
+}
+export async function GET(request: NextRequest) { 
+  return NextResponse.json({ message: 'api/telegram' }, { status: 200 });
 }
