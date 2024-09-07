@@ -1,12 +1,32 @@
+import axios from "axios";
 import telegramApi from "./axios";
-export const  sendMessage = async (messageObj: any, text: string) => {
 
-    return telegramApi.get('sendMessage', {
-        chat_id: messageObj.chat.id,
-        text: text,
-    });
+interface TelegramChat {
+    id: number;
 }
 
+
+interface TelegramMessage {
+    chat: TelegramChat;
+}
+
+export const sendMessage = async (messageObj: TelegramMessage, text: string) => {
+    try {
+        console.log('Sending message:', { chatId: messageObj.chat.id, text });
+        const response = await telegramApi.get('sendMessage', {
+            chat_id: messageObj.chat.id,
+            text: text,
+        });
+        console.log('Message sent successfully:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error sending message:', error);
+        if (axios.isAxiosError(error)) {
+            console.error('Axios error details:', error.response?.data);
+        }
+        throw error; // Re-throw the error so it can be caught in the API route
+    }
+}
 // };
 // const handleMessage = (messageObj: any) => {
 

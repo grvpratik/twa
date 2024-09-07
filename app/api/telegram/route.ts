@@ -2,41 +2,63 @@ import { sendMessage } from '@/lib/bot';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+interface TelegramMessage {
+    chat: {
+        id: number;
+    };
+    text?: string;
+}
+
+interface TelegramUpdate {
+    message?: TelegramMessage;
+}
+
 export async function POST(request: NextRequest) {
     try {
-        // Parse the incoming request body (Telegram sends JSON data)
-        const body = await request.json();
+        const body: TelegramUpdate = await request.json();
+        console.log('Received Telegram update:', JSON.stringify(body, null, 2));
 
-        // Extract important data from the Telegram update
         const { message } = body;
-        console.log(body.message)
 
-        if (message) {
+        if (message && message.chat && message.chat.id) {
             const chatId = message.chat.id;
             const text = message.text || "";
-            console.log({chatId})
-            console.log({text})
+            console.log({ chatId, text });
 
-            if (text.charAt(0) === "/" && chatId) {
+            if (text.charAt(0) === "/") {
                 const command = text.substr(1);
 
-                switch (command) {
-                    case "start":
-                        await sendMessage(chatId, "Hi! I am here to help you 🥰");
-                        break;
-                    default:
-                        await sendMessage(chatId, "Invalid command");
+                try {
+                    switch (command) {
+                        case "start":
+                            await sendMessage(chatId, "Hi! I am here to help you 🥰");
+                            break;
+                        default:
+                            await sendMessage(chatId, "Invalid command");
+                    }
+                } catch (sendError) {
+                    console.error('Error sending message:', sendError);
+                    return NextResponse.json({ error: 'Error sending message' }, { status: 500 });
                 }
             } else {
-                await sendMessage(chatId, text);
+                try {
+                    await sendMessage(chatId, text);
+                } catch (sendError) {
+                    console.error('Error sending message:', sendError);
+                    return NextResponse.json({ error: 'Error sending message' }, { status: 500 });
+                }
             }
+        } else {
+            console.error('Invalid message structure:', message);
+            return NextResponse.json({ error: 'Invalid message structure' }, { status: 400 });
         }
 
-        // Return a 200 status to acknowledge Telegram
         return NextResponse.json({ status: 'ok' }, { status: 200 });
-
     } catch (error) {
         console.error('Error processing Telegram update:', error);
+        if (error instanceof Error) {
+            console.error(error.stack);
+        }
         return NextResponse.json({ error: 'Server error' }, { status: 500 });
     }
 }
