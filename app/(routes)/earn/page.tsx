@@ -1,3 +1,4 @@
+import ListCard from '@/components/Bot/list-card';
 import { cn } from '@/lib/utils';
 import React from 'react'
 // import 'brainly-style-guide/src/sass/main.scss';
@@ -74,9 +75,10 @@ const Notification = ({ name, description, icon, color, time }: any) => {
 };
 
 const EarnPage = () => {
-  return (
-      <div>{notifications.map((x,key) => <Notification key={x.name} name={x.name} color={x.color} description={x.description} time={x.time} />)}</div>
-  )
+    return (<>
+      <ListCard/>
+      <div className='flex flex-col gap-2'>{notifications.map((x,key) => <Notification key={x.name} name={x.name} color={x.color} description={x.description} time={x.time} />)}</div>
+ </> )
 }
 
 export default EarnPage

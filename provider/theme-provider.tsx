@@ -7,5 +7,5 @@ import { useTelegramTheme } from './telegram-theme'
 export function Providers({ children }: { children: React.ReactNode }) {
  const theme= useTelegramTheme()
  
-  return <ThemeProvider attribute="class" defaultTheme={theme} >{children}</ThemeProvider>
+  return <ThemeProvider attribute="class" defaultTheme={theme}>{children}</ThemeProvider>
 }

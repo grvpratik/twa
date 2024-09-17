@@ -23,7 +23,9 @@ export const TelegramProvider = ({
     if (app) {
       app.ready();
      
+      
       setWebApp(app);
+      console.log(app)
     }
   }, []);
 
