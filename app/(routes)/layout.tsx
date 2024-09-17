@@ -16,7 +16,7 @@ const RoutesLayout = ({ children }: { children: React.ReactNode }) => {
     ];
 
     return (
-        <div className="w-full  h-screen">
+        <div className="w-full  ">
             {children}
             <div className="fixed bg-background shadow-lg border-t border-solid left-0 right-0 bottom-0 flex items-center h-16  px-4">
                 {navItems.map((item) => (
