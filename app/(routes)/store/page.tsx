@@ -9,7 +9,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
-import { Button } from '@telegram-apps/telegram-ui'
+import { Button } from '@/components/ui/button'
 
 const StorePage = () => {
   return (
@@ -23,12 +23,12 @@ const StorePage = () => {
         <DrawerFooter>
           <Button>Submit</Button>
           <DrawerClose>
-            <Button >Cancel</Button>
+            <Button variant="outline">Cancel</Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
-    </div>
+</div>
   )
 }
 
