@@ -2,7 +2,7 @@ import React from 'react';
 
 const QuestCard = ({ points, title, Icon }:any) => {
     return (
-        <div className="rounded-lg p-4 bg-accent shadow-md transition-transform transform hover:shadow">
+        <div className="rounded-lg p-4 bg-accent shadow-md transition-transform transform hover:shadow my-2">
             <div className="flex items-center justify-between">
                 <div className="flex items-center">
                     <div className="w-10 h-10 bg-white mr-3 flex items-center justify-center rounded-full shadow-lg">

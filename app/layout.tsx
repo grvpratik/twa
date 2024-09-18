@@ -12,6 +12,7 @@ import { Providers } from "@/provider/theme-provider";
 import { Wallet } from "@/provider/wallet-provider";
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
+import { Phudu } from "next/font/google";
 
 
 const inter = Inter({ subsets: ["latin"] });
