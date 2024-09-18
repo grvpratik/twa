@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from "@/lib/utils";
-import { HomeSVG, StoreSVG, TaskSVG, WalletSVG } from '@/components/Bot/icon';
+import { HomeSVG, StoreSVG, TaskSVG, ProfileSVG } from '@/components/Bot/icon';
 
 const RoutesLayout = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname();
@@ -12,7 +12,7 @@ const RoutesLayout = ({ children }: { children: React.ReactNode }) => {
         { href: '/home', icon: HomeSVG, label: 'Home' },
         { href: '/store', icon: StoreSVG, label: 'Store' },
         { href: '/earn', icon: TaskSVG, label: 'Task' },
-        { href: '/profile', icon: WalletSVG, label: 'User' },
+        { href: '/profile', icon: ProfileSVG, label: 'User' },
     ];
 
     return (

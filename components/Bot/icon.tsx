@@ -139,21 +139,96 @@ export const ProfileSVG: React.FC<SVGProps> = ({
             xmlns="http://www.w3.org/2000/svg"
             fill={fill}
             viewBox="0 0 24 24"
-            strokeWidth={strokeWidth}
-            stroke={stroke}
+         
+            
             className={className}
             {...props}
         >
-            {filled ? (
-                <>  <path fillRule="evenodd" d="M7.502 6h7.128A3.375 3.375 0 0 1 18 9.375v9.375a3 3 0 0 0 3-3V6.108c0-1.505-1.125-2.811-2.664-2.94a48.972 48.972 0 0 0-.673-.05A3 3 0 0 0 15 1.5h-1.5a3 3 0 0 0-2.663 1.618c-.225.015-.45.032-.673.05C8.662 3.295 7.554 4.542 7.502 6ZM13.5 3A1.5 1.5 0 0 0 12 4.5h4.5A1.5 1.5 0 0 0 15 3h-1.5Z" clipRule="evenodd" />
-                    <path fillRule="evenodd" d="M3 9.375C3 8.339 3.84 7.5 4.875 7.5h9.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 0 1 3 20.625V9.375Zm9.586 4.594a.75.75 0 0 0-1.172-.938l-2.476 3.096-.908-.907a.75.75 0 0 0-1.06 1.06l1.5 1.5a.75.75 0 0 0 1.116-.062l3-3.75Z" clipRule="evenodd" /></>
-            ) : (
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            {filled ? (<path fillRule="evenodd" clipRule="evenodd" d="M12 1.25C6.06294 1.25 1.25 6.06294 1.25 12C1.25 17.9371 6.06294 22.75 12 22.75C17.9371 22.75 22.75 17.9371 22.75 12C22.75 6.06294 17.9371 1.25 12 1.25ZM11.9915 6.25C10.1957 6.25 8.73799 7.70407 8.73799 9.5C8.73799 11.2959 10.1957 12.75 11.9915 12.75C13.7874 12.75 15.2451 11.2959 15.2451 9.5C15.2451 7.70407 13.7874 6.25 11.9915 6.25ZM17.0515 16.4917C14.3841 13.5975 9.57056 13.7453 6.95756 16.4821C6.75026 16.6992 6.6924 17.019 6.81048 17.295C6.92855 17.571 7.19983 17.75 7.50002 17.75H16.5C16.7978 17.75 17.0674 17.5738 17.1869 17.3011C17.3065 17.0283 17.2533 16.7107 17.0515 16.4917Z" fill="#000000"></path>
+               ) : (
+                    <>  <circle cx="12" cy="12" r="10" stroke={stroke}  strokeWidth={strokeWidth}  strokeLinecap="round" strokeLinejoin="round"></circle>
+                    <path d="M7.5 17C9.8317 14.5578 14.1432 14.4428 16.5 17M14.4951 9.5C14.4951 10.8807 13.3742 12 11.9915 12C10.6089 12 9.48797 10.8807 9.48797 9.5C9.48797 8.11929 10.6089 7 11.9915 7C13.3742 7 14.4951 8.11929 14.4951 9.5Z" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+           </>
             )}
-
-
 
            
         </svg>
     );
 };
+
+export const YoutubeSVG: React.FC<SVGProps> = ({
+    className = 'size-5',
+    fill = 'none',
+    stroke = 'currentColor',
+    strokeWidth = 1.5,
+    
+    ...props
+}) => {
+
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+           className={className}
+            viewBox="0 0 256 256"
+            xmlSpace="preserve"
+            {...props}
+        >
+            <defs></defs>
+            <g
+                style={{
+                    stroke: "none",
+                    strokeWidth: 0,
+                    strokeDasharray: "none",
+                    strokeLinecap: "butt",
+                    strokeLinejoin: "miter",
+                    strokeMiterlimit: 10,
+                    fill: "none",
+                    fillRule: "nonzero",
+                    opacity: 1
+                }}
+                transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)"
+            >
+                <rect
+                    x="25.98"
+                    y="25.27"
+                    rx={0}
+                    ry={0}
+                    width="38.95"
+                    height="37.62"
+                    style={{
+                        stroke: "none",
+                        strokeWidth: 1,
+                        strokeDasharray: "none",
+                        strokeLinecap: "butt",
+                        strokeLinejoin: "miter",
+                        strokeMiterlimit: 10,
+                        fill: "rgb(255,255,255)",
+                        fillRule: "nonzero",
+                        opacity: 1
+                    }}
+                    transform=" matrix(1 0 0 1 0 0) "
+                />
+                <path
+                    d="M 88.119 23.338 c -1.035 -3.872 -4.085 -6.922 -7.957 -7.957 C 73.144 13.5 45 13.5 45 13.5 s -28.144 0 -35.162 1.881 c -3.872 1.035 -6.922 4.085 -7.957 7.957 C 0 30.356 0 45 0 45 s 0 14.644 1.881 21.662 c 1.035 3.872 4.085 6.922 7.957 7.957 C 16.856 76.5 45 76.5 45 76.5 s 28.144 0 35.162 -1.881 c 3.872 -1.035 6.922 -4.085 7.957 -7.957 C 90 59.644 90 45 90 45 S 90 30.356 88.119 23.338 z M 36 58.5 v -27 L 59.382 45 L 36 58.5 z"
+                    style={{
+                        stroke: "none",
+                        strokeWidth: 1,
+                        strokeDasharray: "none",
+                        strokeLinecap: "butt",
+                        strokeLinejoin: "miter",
+                        strokeMiterlimit: 10,
+                        fill: "rgb(246,28,13)",
+                        fillRule: "nonzero",
+                        opacity: 1
+                    }}
+                    transform=" matrix(1 0 0 1 0 0) "
+                    strokeLinecap="round"
+                />
+            </g>
+        </svg>
+
+    );
+};
+

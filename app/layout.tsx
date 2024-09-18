@@ -10,6 +10,8 @@ import "@/styles/globals.css";
 // import '@telegram-apps/telegram-ui/dist/styles.css';
 import { Providers } from "@/provider/theme-provider";
 import { Wallet } from "@/provider/wallet-provider";
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,7 +25,7 @@ export default function RootLayout({
       <head>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive"></Script>
       </head>
-      <body className={inter.className}>
+      <body className={GeistSans.className}>
         <TelegramProvider>
           <Providers>
             <Wallet>

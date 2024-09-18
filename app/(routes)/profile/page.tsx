@@ -1,4 +1,6 @@
 "use client";
+import QuestCard from "@/components/Bot/card";
+import { YoutubeSVG } from "@/components/Bot/icon";
 import { useTelegram } from "@/provider/telegram-provider";
 import React from "react";
 
@@ -10,6 +12,13 @@ const ProfilePage = () => {
 			<div className="flex flex-col px-4">
 				<h1 className=" font-extrabold text-2xl my-2">Wallet</h1>
 				<div className="flex  items-baseline"> <h3 className=" text-4xl font-extrabold">300</h3><span className=" font-semibold text-sm leading-none ">pts</span></div>
+			</div>
+			<div className="p-4">
+				<QuestCard
+					title="The Open League Quest"
+					points="1000"
+					Icon={YoutubeSVG}
+				/>
 			</div>
             {/* <div className=" flex flex-col  w-full h-full px-4 ">
                 <div className=" leading-none text-xl items-start justify-start font-bold py-2 px-2">Profile</div>
