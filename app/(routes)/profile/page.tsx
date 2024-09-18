@@ -32,8 +32,8 @@ const events = [
 ];
 const ProfilePage = async () => {
 	const { user, webApp } = useTelegram();
-	const response = await axios.get('http://localhost:8080/v1/user/task');
-	const res = response.data.tasks;
+	// const response = await axios.get('http://localhost:8080/v1/user/task');
+	// const res = response.data.tasks;
 
 	const getIconComponent = (platformName:string) => {
 		switch (platformName) {
@@ -60,7 +60,7 @@ const ProfilePage = async () => {
 				</div>
 			</div>
 			<div className="p-4">
-				{res.map((data:any) => {
+				{/* {res.map((data:any) => {
 					const IconComponent = getIconComponent(data.platform); // Get the component function
 					return (
 						<QuestCard
@@ -70,7 +70,7 @@ const ProfilePage = async () => {
 							Icon={IconComponent} // Pass the component function
 						/>
 					);
-				})}
+				})} */}
 			</div>
 
 
