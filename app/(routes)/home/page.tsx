@@ -1,15 +1,29 @@
+"use client"
+
+
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const HomePageRoute = () => {
-	const data = JSON.stringify({
-		eventType: 'web_app_setup_back_button',
-		eventData: {
-			is_visible: true,
-		},
-	});
 
-	window.parent.postMessage(data, 'https://web.telegram.org');
+
+
+	React.useEffect(() => {
+	  
+	
+		const data = JSON.stringify({
+			eventType: 'web_app_setup_back_button',
+			eventData: {
+				is_visible: true,
+			},
+		});
+	
+		window.parent.postMessage(data, 'https://web.telegram.org');
+	  return () => {
+		
+	  }
+	}, [])
+	
 	return (
 		<div>
 			<Tabs defaultValue="account" className="">
