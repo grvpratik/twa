@@ -3,6 +3,8 @@ import { useSearchParams } from 'next/navigation'
 import { jwtVerify } from 'jose';
 import { headers } from 'next/headers';
 import { serialize } from 'v8';
+import { Appbar } from '@/components/appbar';
+import PaymentForm from '@/components/form/payment-form';
 
 
 const secret = new TextEncoder().encode(
@@ -30,7 +32,7 @@ export default async function PaymentPage({
     console.log(searchParams)
 
 
-    try {
+    
         if (!searchParams?.token) {
                 return <div>Error: No token provided</div>;
             }
@@ -43,9 +45,9 @@ export default async function PaymentPage({
 
         console.log(payload)
     
-} catch (error) {
+
     
-}
+
 
 
 
@@ -77,12 +79,8 @@ export default async function PaymentPage({
     return (
         <div>
             <h1>Payment Details</h1>
-            {/* <p>Payer ID: {task.payer.id}</p>
-            <p>Payer Name: {task.payer.first_name} {task.payer.Last_name}</p>
-            <p>Task ID: {task.id}</p>
-            <p>Amount: ${task.amount}</p>
-            <p>Platform: {task.platform}</p>
-            <p>Task Name: {task.task_name}</p> */}
+            <Appbar token={token} />
+            <PaymentForm token={token} />
             
         </div>
     );
