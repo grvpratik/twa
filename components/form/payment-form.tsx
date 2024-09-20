@@ -50,7 +50,7 @@ const PaymentForm = ({token}:{token:string}) => {
             // router.push(signature);
             localStorage.setItem('txSignature', signature);
 
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/v1/payer/task`, {
+            const response = await axios.post(`https://twa-lake.vercel.app/v1/payer/task`, {
                
                 signature: txSignature
             }, {
