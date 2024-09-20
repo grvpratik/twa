@@ -1,56 +1,56 @@
-import axios, { AxiosError } from 'axios';
+// import axios, { AxiosError } from 'axios';
 
 
 
-const TELEGRAM_API_URL = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}`;
+// const TELEGRAM_API_URL = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}`;
 
-// Helper function to send messages to Telegram users
-export const sendMessage = async (chatId: any, text: string, options = {}) => {
-    try {
-        const response = await axios.post(`${TELEGRAM_API_URL}/sendMessage`, {
-            chat_id: chatId,
-            text: text,
-            ...options,
-        });
-        return response.data;
-    } catch (error) {
-        console.error('Error sending message to Telegram:', error.response?.data || error.message);
-        throw error;
-    }
-};
+// // Helper function to send messages to Telegram users
+// export const sendMessage = async (chatId: any, text: string, options = {}) => {
+//     try {
+//         const response = await axios.post(`${TELEGRAM_API_URL}/sendMessage`, {
+//             chat_id: chatId,
+//             text: text,
+//             ...options,
+//         });
+//         return response.data;
+//     } catch (error) {
+//         console.error('Error sending message to Telegram:', error.response?.data || error.message);
+//         throw error;
+//     }
+// };
 
-// Helper function to edit the inline keyboard (disable buttons)
-export const editMessageReplyMarkup = async (chatId: any, messageId: any) => {
-    try {
-        const response = await axios.post(`${TELEGRAM_API_URL}/editMessageReplyMarkup`, {
-            chat_id: chatId,
-            message_id: messageId,
-            reply_markup: {
-                inline_keyboard: [], // Empty keyboard to disable buttons
-            },
-        });
-        console.log('Inline keyboard disabled:', response.data);
-        return response.data;
-    } catch (error) {
-        console.error('Error editing message reply markup:', error.response?.data || error.message);
-        throw error;
-    }
-};
+// // Helper function to edit the inline keyboard (disable buttons)
+// export const editMessageReplyMarkup = async (chatId: any, messageId: any) => {
+//     try {
+//         const response = await axios.post(`${TELEGRAM_API_URL}/editMessageReplyMarkup`, {
+//             chat_id: chatId,
+//             message_id: messageId,
+//             reply_markup: {
+//                 inline_keyboard: [], // Empty keyboard to disable buttons
+//             },
+//         });
+//         console.log('Inline keyboard disabled:', response.data);
+//         return response.data;
+//     } catch (error) {
+//         console.error('Error editing message reply markup:', error.response?.data || error.message);
+//         throw error;
+//     }
+// };
 
-// Helper function to delete a message from the chat
-export const deleteMessage = async (chatId:number, messageId:string) => {
-    try {
-        const response = await axios.post(`${TELEGRAM_API_URL}/deleteMessage`, {
-            chat_id: chatId,
-            message_id: messageId,
-        });
-        console.log('Message deleted:', response.data);
-        return response.data;
-    } catch (error) {
-        error instanceof AxiosError ? console.error('Error deleting message from Telegram:', error.response?.data || error.message):null
-        throw error;
-    }
-};
+// // Helper function to delete a message from the chat
+// export const deleteMessage = async (chatId:number, messageId:string) => {
+//     try {
+//         const response = await axios.post(`${TELEGRAM_API_URL}/deleteMessage`, {
+//             chat_id: chatId,
+//             message_id: messageId,
+//         });
+//         console.log('Message deleted:', response.data);
+//         return response.data;
+//     } catch (error) {
+//         error instanceof AxiosError ? console.error('Error deleting message from Telegram:', error.response?.data || error.message):null
+//         throw error;
+//     }
+// };
 
 // };
 // const handleMessage = (messageObj: any) => {
