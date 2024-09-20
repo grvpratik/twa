@@ -5,7 +5,7 @@ import { ModeToggle } from '@/components/theme'
 const CreatePage = () => {
   return (<>
     <ModeToggle/>
-     <Appbar/>  
+  
      <ProfileForm/></>
   )
 }
