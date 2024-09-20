@@ -42,7 +42,7 @@ export const Appbar = ({token}:{token:string}) => {
             console.log("Public Key:", publicKey.toString());
 
             // Make the API request to sign in
-            const response = await axios.post(`https://twa-lake.vercel.app/v1/payer/wallet`, {
+            const response = await axios.post(`https://hackathon-server-psi.vercel.app/v1/payer/wallet`, {
                
                 signature,
                 publicKey: publicKey?.toString()
