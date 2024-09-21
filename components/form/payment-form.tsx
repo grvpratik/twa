@@ -66,7 +66,7 @@ const PaymentForm = ({ token }: { token: string }) => {
             localStorage.setItem('txSignature', signature);
 
             // Send the signature to the backend
-            const response = await axios.post(`http://localhost:8080/v1/payer/task`, {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/v1/payer/task`, {
                 signature: signature // Use the signature directly instead of txSignature
             }, {
                 headers: {

@@ -42,7 +42,7 @@ export const Appbar = ({token}:{token:string}) => {
             console.log("Public Key:", publicKey.toString());
 
             // Make the API request to sign in
-            const response = await axios.post(`http://localhost:8080/v1/payer/wallet`, {   
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/v1/payer/wallet`, {   
                 signature,
                 publicKey: publicKey?.toString()
             }, {
