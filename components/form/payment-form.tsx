@@ -1,25 +1,28 @@
-'use client'
+'use client';
+
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey, SystemProgram, Transaction } from '@solana/web3.js';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Button } from '../ui/button';
 import axios from 'axios';
 
-const PaymentForm = ({token}:{token:string}) => {
+const PaymentForm = ({ token }: { token: string }) => {
     const [txSignature, setTxSignature] = useState<string>("");
-    const [loading, setLoading] = React.useState<boolean>(false);
-    const [error, setError] = React.useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
 
     const { publicKey, sendTransaction } = useWallet();
     const { connection } = useConnection();
     const router = useRouter();
-    React.useEffect(() => {
+
+    useEffect(() => {
         const savedSignature = localStorage.getItem('txSignature');
         if (savedSignature) {
             setTxSignature(savedSignature);
         }
     }, []);
+
     async function makePayment() {
         if (!publicKey) {
             setError("Wallet is not connected.");
@@ -30,35 +33,48 @@ const PaymentForm = ({token}:{token:string}) => {
         setError(null);
 
         try {
+            // Create the transaction
             const transaction = new Transaction().add(
                 SystemProgram.transfer({
                     fromPubkey: publicKey!,
                     toPubkey: new PublicKey("j1oAbxxiDUWvoHxEDhWE7THLjEkDQW2cSHYn2vttxTF"),
-                    lamports: 100000000,
+                    lamports: 100000000, // 0.1 SOL
                 })
             );
 
+            // Get the latest blockhash and context
             const {
                 context: { slot: minContextSlot },
                 value: { blockhash, lastValidBlockHeight }
             } = await connection.getLatestBlockhashAndContext();
 
+            // Send the transaction
             const signature = await sendTransaction(transaction, connection, { minContextSlot });
-            await connection.confirmTransaction({ blockhash, lastValidBlockHeight, signature });
 
+            // Confirm the transaction
+            const confirmation = await connection.confirmTransaction(
+                { blockhash, lastValidBlockHeight, signature },
+                'finalized'
+            );
+
+            if (confirmation.value.err) {
+                throw new Error('Transaction failed to confirm');
+            }
+
+            // Save the signature in state and local storage
             setTxSignature(signature);
-            // router.push(signature);
             localStorage.setItem('txSignature', signature);
 
-            const response = await axios.post(`https://hackathon-server-psi.vercel.app/v1/payer/task`, {
-               
-                signature: txSignature
+            // Send the signature to the backend
+            const response = await axios.post(`http://localhost:8080/v1/payer/task`, {
+                signature: signature // Use the signature directly instead of txSignature
             }, {
                 headers: {
-                    "Authorization":token
+                    "Authorization": token
                 }
             });
 
+            // Clear local storage and navigate to task page
             localStorage.removeItem('txSignature');
             router.push(`/task/${response.data.id}`);
 
@@ -69,9 +85,15 @@ const PaymentForm = ({token}:{token:string}) => {
             setLoading(false);
         }
     }
-  return (
-      <div>  <Button onClick={makePayment} disabled={loading}>{loading ? "Loading.." : "Pay"}</Button></div>
-  )
+
+    return (
+        <div>
+            <Button onClick={makePayment} disabled={loading}>
+                {loading ? "Loading..." : "Pay"}
+            </Button>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+        </div>
+    );
 }
 
-export default PaymentForm
+export default PaymentForm;
