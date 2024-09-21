@@ -15,7 +15,7 @@ import { GeistMono } from 'geist/font/mono';
 import { Phudu } from "next/font/google";
 
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Phudu({ subsets: ["latin"] });
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,7 +26,7 @@ export default function RootLayout({
       <head>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive"></Script>
       </head>
-      <body className={GeistSans.className}>
+      <body className={inter.className}>
         <TelegramProvider>
           <Providers>
             <Wallet>

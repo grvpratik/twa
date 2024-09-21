@@ -12,7 +12,11 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { Appbar } from "@/components/appbar";
 import { Gamepad, HomeIcon, User, Workflow } from "lucide-react";
 import Link from "next/link";
-
+import { ModeToggle } from "@/components/theme";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+const inter = Inter({ subsets: ["latin"] });
+import { Inter } from 'next/font/google'
 const HomePage = () => {
 	const { user, webApp } = useTelegram();
 	console.log(webApp);
@@ -24,7 +28,18 @@ const HomePage = () => {
 	}, [telegramTheme]);
 
 	return (
-		<><div>home page <Link href={'/profile'}>profile</Link><Link href={'/create'}>create</Link></div></>
+		<>
+			{/* <div>
+				home page <Link href={"/profile"}>profile</Link>
+				<Link href={"/create"}>create</Link>
+			</div> */}
+			<div className=' w-full h-screen p-4 flex flex-col  justify-end relative  overflow-x-hidden'>
+
+				<ModeToggle />
+				<h1 className=' text-6xl font-extrabold  text-balance my-4   '>Get <br /> Rewarded <br /> for your contribution</h1>
+				<Button className={cn('bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% font-medium tracking-widest rounded-full  text-white', inter.className)}>Get Started</Button>
+			</div>
+		</>
 	);
 };
 
