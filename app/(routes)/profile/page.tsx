@@ -1,8 +1,9 @@
-"use client";
+
+import RewardPoints from "@/components/Bot/balance";
 import QuestCard from "@/components/Bot/card";
 import EventTimeline from "@/components/Bot/event";
 import { YoutubeSVG } from "@/components/Bot/icon";
-import { useTelegram } from "@/provider/telegram-provider";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import axios from "axios";
 import { Bird, DiscIcon, TableRowsSplit, TargetIcon } from "lucide-react";
 import React from "react";
@@ -30,37 +31,25 @@ const events = [
 	},
 	// ... more events
 ];
-const ProfilePage = async () => {
-	const { user, webApp } = useTelegram();
+const ProfilePage =  () => {
+	
 	// const response = await axios.get('http://localhost:8080/v1/user/task');
 	// const res = response.data.tasks;
 
-	const getIconComponent = (platformName:string) => {
-		switch (platformName) {
-			case 'Twitter':
-				return Bird; // Return the component function
-			case 'YouTube':
-				return YoutubeSVG; // Return the component function
-			case 'Telegram':
-				return TargetIcon; // Return the component function
-			case 'Discord':
-				return DiscIcon; // Return the component function
-			default:
-				return null; // Handle unrecognized platforms
-		}
-	};
-
-	return (
-		<div className="h-[200vh]">
-			<div className="flex flex-col px-4">
-				<h1 className="font-extrabold text-2xl my-2">Wallet</h1>
-				<div className="flex items-baseline">
-					<h3 className="text-4xl font-extrabold">300</h3>
-					<span className="font-semibold text-sm leading-none">pts</span>
-				</div>
-			</div>
-			<div className="p-4">
-				{/* {res.map((data:any) => {
+	// const getIconComponent = (platformName:string) => {
+	// 	switch (platformName) {
+	// 		case 'Twitter':
+	// 			return Bird; // Return the component function
+	// 		case 'YouTube':
+	// 			return YoutubeSVG; // Return the component function
+	// 		case 'Telegram':
+	// 			return TargetIcon; // Return the component function
+	// 		case 'Discord':
+	// 			return DiscIcon; // Return the component function
+	// 		default:
+	// 			return null; // Handle unrecognized platforms
+	// 	}
+		{/* {res.map((data:any) => {
 					const IconComponent = getIconComponent(data.platform); // Get the component function
 					return (
 						<QuestCard
@@ -71,10 +60,57 @@ const ProfilePage = async () => {
 						/>
 					);
 				})} */}
-			</div>
+	//};
+
+	return (
+		<div className="h-full p-4 flex flex-col gap-2">
+			<RewardPoints/>
+
+			<Tabs defaultValue="account" className="w-full">
+				<TabsList className="w-full ">
+					<TabsTrigger value="account">Account</TabsTrigger>
+					<TabsTrigger value="password">Transations</TabsTrigger>
+
+				</TabsList>
+				<TabsContent value="account">
+					Make changes to your account here.
+				</TabsContent>
+				<TabsContent value="password">Change your password here.</TabsContent>
+			</Tabs>
+		</div>
+	);
+};
+
+export default ProfilePage;
 
 
-			<EventTimeline events={events} />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			{/* <EventTimeline events={events} /> */}
 			{/* <div className=" flex flex-col  w-full h-full px-4 ">
                 <div className=" leading-none text-xl items-start justify-start font-bold py-2 px-2">Profile</div>
 				<div className="flex gap-1 ">
@@ -87,8 +123,4 @@ const ProfilePage = async () => {
 					</div>
 				</div>
 			</div> */}
-		</div>
-	);
-};
 
-export default ProfilePage;
