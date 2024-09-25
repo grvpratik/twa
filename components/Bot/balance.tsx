@@ -6,8 +6,6 @@ import { useTelegram } from "@/provider/telegram-provider"; // Assume this custo
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { cn } from "@/lib/utils";
-import { ArrowDown, ArrowLeftRight, ArrowUp, Bell, Plus } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const fetchRewardPoints = async (telegramInitData: string) => {
     console.log({ telegramInitData });
@@ -33,42 +31,15 @@ const RewardPoints = () => {
 
     return (
         <>
-            <div className="flex justify-between items-center mb-4">
-                <div>
-                    <Avatar className=" size-6">
-                        <AvatarImage src="https://github.com/shadcn.png" />
-                        <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                </div>
-                <div>
-                    <Bell className="size-5" />
-                </div>
-            </div>
+            
 
-            <div className="">
+            <div className="mb-2">
                 <h4 className="text-xs leading-none font-semibold my-1 text-gray-700">
-                    Balance
+                 Balance
                 </h4>
-                <p className={cn("text-3xl font-semibold font-mono")}>{data || 0}</p>
+                <p className={cn("text-3xl font-semibold font-mono")}> ${data || 0}</p>
             </div>
-            <div className="my-2 flex items-center justify-center *:flex-1 gap-2">
-                <div className="flex flex-col gap-1 items-center justify-center text-sm">
-                    <div className=" w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-gray-200 "><Plus className="size-4"/></div>
-                    <span>add</span>{" "}
-                </div>
-                <div className="flex flex-col gap-1 items-center justify-center text-sm">
-                    <div className=" w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-gray-200"><ArrowLeftRight className="size-4" /></div>
-                    <span>add</span>{" "}
-                </div>
-                <div className="flex flex-col gap-1 items-center justify-center text-sm">
-                    <div className=" w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-gray-200"><ArrowUp className="size-4" /></div>
-                    <span>add</span>{" "}
-                </div>
-                <div className="flex flex-col gap-1 items-center justify-center text-sm">
-                    <div className=" w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-gray-200"><ArrowDown className="size-4" /></div>
-                    <span>add</span>{" "}
-                </div>
-            </div>
+           
         </>
     ); 
 };

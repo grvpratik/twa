@@ -1,7 +1,7 @@
 
 import Script from "next/script";
 
-import { Inter } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 
 
 import { TelegramProvider } from "@/provider/telegram-provider";
@@ -15,6 +15,7 @@ import { GeistMono } from 'geist/font/mono';
 import { Phudu } from "next/font/google";
 import QueryClientWrapper from "@/provider/query-client-provider";
 import { AppRoot } from "@telegram-apps/telegram-ui";
+
 const inter = Inter({ subsets: ["latin"] });
 
 const phudu = Phudu({ subsets: ["latin"] });
