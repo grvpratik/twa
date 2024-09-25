@@ -16,9 +16,9 @@ import { Phudu } from "next/font/google";
 import QueryClientWrapper from "@/provider/query-client-provider";
 import { AppRoot } from "@telegram-apps/telegram-ui";
 
-const inter = Inter({ subsets: ["latin"] });
+const interx = Inter({ subsets: ["latin"] });
 
-const phudu = Phudu({ subsets: ["latin"] });
+const inter = Phudu({ subsets: ["latin"] });
 export default function RootLayout({
   children,
 }: Readonly<{

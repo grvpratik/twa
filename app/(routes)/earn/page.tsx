@@ -1,93 +1,57 @@
-'use client'
+"use client";
 import { ApiService } from "@/action/usefetch";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { useTelegram } from "@/provider/telegram-provider";
 import { useQuery } from "@tanstack/react-query";
 import WebApp from "@twa-dev/sdk";
+import { Loader, Plus } from "lucide-react";
 import React, { useState } from "react";
-const list = [
-	{
-		"id": "23221141-f396-451e-b075-fe544b2c201e",
-		"platform": "youtube",
-		"task_name": "subscribe",
-		"amount": 50,
-		"signature": "5DrSMqE86SX5MHmpkyAKnFxuNgWvTn98hW6u6W8djXnZe3YK15M9KLVtRzRKXBex6FKqLN12HfwiVKww4sbQtmrN",
-		"comment": null,
-		"task_link": "https://youtube.com/pratik",
-		"payer_id": "d484b806-1c30-4c0a-a444-09f4739dd48d",
-		"status": "Active",
-		"endDate": "2024-09-21T11:55:31.824Z",
-		"createdAt": "2024-09-21T11:55:31.825Z",
-		"updatedAt": "2024-09-21T11:56:52.345Z"
-	},
-	{
-		"id": "a35002f9-3e09-46c3-b224-1da1d26ef98e",
-		"platform": "twitter",
-		"task_name": "follow",
-		"amount": 100,
-		"signature": "",
-		"comment": null,
-		"task_link": "Https://twitter.com/bokucollab",
-		"payer_id": "d484b806-1c30-4c0a-a444-09f4739dd48d",
-		"status": "Hold",
-		"endDate": "2024-09-22T07:55:51.191Z",
-		"createdAt": "2024-09-22T07:55:51.193Z",
-		"updatedAt": "2024-09-22T07:55:51.193Z"
-	},
-	{
-		"id": "d5f6bd8f-5493-467a-98d2-f4fb4614e545",
-		"platform": "discord",
-		"task_name": "join",
-		"amount": 100,
-		"signature": "",
-		"comment": null,
-		"task_link": "https://discord.gg/rer",
-		"payer_id": "d484b806-1c30-4c0a-a444-09f4739dd48d",
-		"status": "Hold",
-		"endDate": "2024-09-23T17:26:45.434Z",
-		"createdAt": "2024-09-23T17:26:45.435Z",
-		"updatedAt": "2024-09-23T17:26:45.435Z"
-	},
-	{
-		"id": "425c1b05-ac4d-4865-bff9-d0e3790411a2",
-		"platform": "youtube",
-		"task_name": "subscribe",
-		"amount": 100,
-		"signature": "",
-		"comment": null,
-		"task_link": "https://youtube.com/fr",
-		"payer_id": "d484b806-1c30-4c0a-a444-09f4739dd48d",
-		"status": "Hold",
-		"endDate": "2024-09-23T18:16:33.392Z",
-		"createdAt": "2024-09-23T18:16:33.394Z",
-		"updatedAt": "2024-09-23T18:16:33.394Z"
-	}
-]
+import TaskListCard from "./components/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 
 const EarnPage = () => {
-	const [id, setId] = useState('')
-	const { webApp } = useTelegram()
-const { data, error, isLoading } = useQuery({
-			queryKey: ['rewardPoints',id],
-			queryFn: async () => ApiService.submitTask(id, webApp?.initData!) ,
-			enabled: !!webApp?.initData && !!id, // Only run the query if initData is available)
-		})
-	
-console.log({data})
-	if (isLoading) return <div>Loading...</div>;
-	if (error) return <div>Error occurred: {error.message}</div>;
+	const { webApp } = useTelegram();
+	const [id, setId] = useState("");
 
+	const { data, error, isLoading } = useQuery({
+		queryKey: ["tasklists", id],
+		queryFn: async () => ApiService.getTasks(),
+		// Only run the query if initData is available)
+	});
+
+	if (isLoading)
+		return (
+			<div className=" w-full flex items-center justify-center h-screen gap-1">
+				{" "}
+				<Loader className="animate-spin h-8 w-8  " />
+				Loading...
+			</div>
+		);
+	if (error) return <div>Error occurred: {error.message}</div>;
+	console.log({ data });
 	return (
 		<>
-			{list.map((data) => (
-				<div key={data.id} className="w-full p-2 py-4 text-xl rounded-lg bg-lime-300 my-2" onClick={() => setId(data.id!)}>
-					{data.task_name}
-				</div>
+			<div className=" font-bold text-2xl p-2">Tasks</div>
+			<div>
+				<Tabs defaultValue="account" className="">
+					<TabsList>
+						<TabsTrigger value="account">Youtube</TabsTrigger>
+						<TabsTrigger value="password">Twitter</TabsTrigger>
+					</TabsList>
+					<TabsContent value="account">
+						
+					</TabsContent>
+					<TabsContent value="password">Change your password here.</TabsContent>
+				</Tabs>
+			</div>
+			{data.map((data:any) => (
+				<TaskListCard task={data} webApp={webApp} />
 			))}
-			{data && <div>{JSON.stringify(data)}</div>} {/* Display the response data */}
+			{/* {data && <div>{JSON.stringify(data)}</div>} Display the response data */}
 		</>
 	);
-
 };
 
 export default EarnPage;
@@ -163,7 +127,8 @@ export default EarnPage;
 // 		</figure>
 // 	);
 // };
-{/* <ListCard />
+{
+	/* <ListCard />
 			<div className="flex flex-col gap-2">
 				{notifications.map((x, key) => (
 					<Notification
@@ -174,4 +139,5 @@ export default EarnPage;
 						time={x.time}
 					/>
 				))}
-			</div> */}
+			</div> */
+}
