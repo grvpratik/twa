@@ -27,7 +27,7 @@ export const ApiService = {
                 Authorization: `tma ${initData}`
             }
         } );
-        return response.data;
+        return response;
     },
 
     getPayouts: async () => {

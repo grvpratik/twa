@@ -1,56 +1,56 @@
-"use client";
-import { ApiService } from "@/action/usefetch";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { useTelegram } from "@/provider/telegram-provider";
+'use client'
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import WebApp from "@twa-dev/sdk";
-import { Loader, Plus } from "lucide-react";
-import React, { useState } from "react";
+import { ApiService } from "@/action/usefetch";
+import { useTelegram } from "@/provider/telegram-provider";
+import { Loader } from "lucide-react";
 import TaskListCard from "./components/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-
 const EarnPage = () => {
 	const { webApp } = useTelegram();
-	const [id, setId] = useState("");
-
+	console.log({ webApp });
 	const { data, error, isLoading } = useQuery({
-		queryKey: ["tasklists", id],
-		queryFn: async () => ApiService.getTasks(),
-		// Only run the query if initData is available)
+		queryKey: ["tasklists"],
+		queryFn: ApiService.getTasks,
 	});
 
 	if (isLoading)
 		return (
-			<div className=" w-full flex items-center justify-center h-screen gap-1">
-				{" "}
-				<Loader className="animate-spin h-8 w-8  " />
+			<div className="w-full flex items-center justify-center h-screen gap-1">
+				<Loader className="animate-spin h-8 w-8" />
 				Loading...
 			</div>
 		);
+
 	if (error) return <div>Error occurred: {error.message}</div>;
-	console.log({ data });
+
 	return (
-		<>
-			<div className=" font-bold text-2xl p-2">Tasks</div>
+		<div className="bg-background relative h-full w-full">
+			<div className="font-bold text-2xl p-2">Tasks</div>
 			<div>
-				<Tabs defaultValue="account" className="">
+				<Tabs defaultValue="youtube" className="">
 					<TabsList>
-						<TabsTrigger value="account">Youtube</TabsTrigger>
-						<TabsTrigger value="password">Twitter</TabsTrigger>
+						<TabsTrigger value="youtube">Youtube</TabsTrigger>
+						<TabsTrigger value="twitter">Twitter</TabsTrigger>
 					</TabsList>
-					<TabsContent value="account">
-						
+					<TabsContent value="youtube">
+						{data
+							.filter((task) => task.platform === "youtube")
+							.map((task) => (
+								<TaskListCard key={task.id} task={task} webApp={webApp} />
+							))}
 					</TabsContent>
-					<TabsContent value="password">Change your password here.</TabsContent>
+					<TabsContent value="twitter">
+						{data
+							.filter((task) => task.platform === "twitter")
+							.map((task) => (
+								<TaskListCard key={task.id} task={task} webApp={webApp} />
+							))}
+					</TabsContent>
 				</Tabs>
 			</div>
-			{data.map((data:any) => (
-				<TaskListCard task={data} webApp={webApp} />
-			))}
-			{/* {data && <div>{JSON.stringify(data)}</div>} Display the response data */}
-		</>
+		</div>
 	);
 };
 

@@ -1,27 +1,34 @@
+'use client'
 import React from "react";
 import { Drawer, DrawerTrigger, DrawerContent } from "@/components/ui/drawer";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "../ui/button";
+import { useQuery } from "@tanstack/react-query";
+import { ApiService } from "@/action/usefetch";
 const steps = [
-	{ title: "Step 1", description: "Description for step 1..." },
-	{ title: "Step 2", description: "Description for step 2..." },
-	{ title: "Step 3", description: "Description for step 3..." },
-	{ title: "Ready!", description: "All steps completed." },
+	{ title: "Complete task", description: "open the link" },
+	{ title: "Make proof", description: "take a screenshot " },
+	{ title: "Submission create", description: "create a submission" },
+	{ title: "upload proof", description: "All steps completed." },
+	{ title: "verify", description: "check if completed" },
 ];
-const VerticalStep = ({ step, title, description, isLast }:any) => (
+const VerticalStep = ({ step, title, description, isLast }: any) => (
+	
+
+	
 	<div className="flex">
 		<div className="mr-4 flex flex-col items-center">
 			<div>
 				<div
-					className={`flex h-10 w-10 items-center justify-center rounded-full border-2 border-blue-900 ${
+					className={`flex h-8 w-8 items-center justify-center rounded-full border-2 border-blue-900 ${
 						isLast ? "bg-blue-900" : ""
 					}`}
 				>
 					{isLast ? (
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							width={24}
-							height={24}
+							width={18}
+							height={18}
 							viewBox="0 0 24 24"
 							fill="none"
 							stroke="currentColor"
@@ -53,10 +60,10 @@ const VerticalStep = ({ step, title, description, isLast }:any) => (
 					)}
 				</div>
 			</div>
-			{!isLast && <div className="h-full w-px bg-gray-300 dark:bg-slate-500" />}
+			{!isLast && <div className="h-full w-px " />}
 		</div>
 		<div className="pt-1 pb-8">
-			<p className="mb-2 text-xl font-bold text-gray-900 dark:text-slate-300">
+			<p className="mb-2 text-lg font-bold text-gray-900 dark:text-slate-300">
 				{title}
 			</p>
 			<p className="text-gray-600 dark:text-slate-400">{description}</p>
@@ -64,7 +71,12 @@ const VerticalStep = ({ step, title, description, isLast }:any) => (
 	</div>
 );
 
-const VerticalSteps = ({ link }:any) => {
+const VerticalSteps = ({ link }: any) => {
+	// const { data, error, isLoading } = useQuery({
+	// 	queryKey: ["tasklists", id],
+	// 	queryFn: async () => ApiService.getTasks(),
+	// 	// Only run the query if initData is available)
+	// });
 	return (
 		<Drawer>
 			<DrawerTrigger>
@@ -79,7 +91,7 @@ const VerticalSteps = ({ link }:any) => {
 				<ScrollArea className="h-[80vh] overflow-y-auto">
 					<div className="p-4 max-w-xl mx-auto ">
 						<h2 className="font-heading  mb-8 text-3xl font-bold lg:text-4xl">
-							Vertical Steps
+							Steps to recieve point
 						</h2>
 						{steps.map((step, index) => (
 							<VerticalStep
