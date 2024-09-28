@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8080/v1';
+const BASE_URL = `${process.env.NEXT_PUBLIC_URL}/v1`;
 
 const instance = axios.create({
     baseURL: BASE_URL,

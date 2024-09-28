@@ -43,11 +43,15 @@ const HomePage = () => {
 	const auth = async (initData: string) => {
 		if (initData) {
 			try {
-				const response = await axios.post('http://localhost:8080/v1/user/auth/session', null, {
-					headers: {
-						Authorization: `tma ${initData}`
+				const response = await axios.post(
+					`${process.env.NEXT_PUBLIC_URL}/v1/user/auth/session`,
+					null,
+					{
+						headers: {
+							Authorization: `tma ${initData}`,
+						},
 					}
-				});
+				);
 				console.log(response);
 			} catch (error) {
 				console.error("Authentication error:", error);

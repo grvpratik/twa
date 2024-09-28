@@ -9,11 +9,15 @@ import { cn } from "@/lib/utils";
 
 const fetchRewardPoints = async (telegramInitData: string) => {
     console.log({ telegramInitData });
-    const response = await axios.post("http://localhost:8080/v1/user/me", null, {
-        headers: {
-            Authorization: `tma ${telegramInitData}`,
-        },
-    });
+    const response = await axios.post(
+			`${process.env.NEXT_PUBLIC_URL}/v1/user/me`,
+			null,
+			{
+				headers: {
+					Authorization: `tma ${telegramInitData}`,
+				},
+			}
+		);
     return response.data.points;
 };
 
