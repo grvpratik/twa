@@ -1,44 +1,38 @@
-"use client";
-import React from "react";
-
-const steps = [
-	{ title: "Step 1", description: "Description for step 1..." },
-	{ title: "Step 2", description: "Description for step 2..." },
-	{ title: "Step 3", description: "Description for step 3..." },
-	{ title: "Ready!", description: "All steps completed." },
-];
-const BOT_USERNAME = "open_guild_bot";
-// function redirectToTelegramChat(submissionId:string) {
-// 	const encodedSubmissionId = encodeURIComponent(submissionId);
-// 	// Encode the submission ID to ensure it's URL-safe
-
-// 	// Construct the deep link URL to open the chat directly
-// 	const deepLink = `tg://resolve?domain=${BOT_USERNAME}&start=${encodedSubmissionId}`;
-
-// 	// Fallback URL for web clients
-// 	const webFallback = `https://t.me/${BOT_USERNAME}?start=${encodedSubmissionId}`;
-
-// 	// Try to open the Telegram app
-// 	window.location.href = deepLink;
-
-// 	// If the Telegram app doesn't open within 100ms, redirect to the web version
-// 	setTimeout(() => {
-// 		if (document.hidden) {
-// 			return; // The app was opened
-// 		}
-// 		window.location.href = webFallback;
-// 	}, 100);
-// }
+'use client'
+import React, { useState } from "react";
+import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
 
 const StorePage = () => {
-	// const handleTaskClick = async (taskId: any) => {
-	// 	await WebApp.sendData(JSON.stringify({ action: "start_task", taskId }));
-	// };
+	const [walletAddress, setWalletAddress] = useState(null);
+
+	const connectWallet = async () => {
+		if (window.solana) {
+			try {
+				const response = await window.solana.connect();
+				setWalletAddress(response.publicKey.toString());
+			} catch (err) {
+				console.error(err);
+			}
+		} else {
+			alert("Phantom wallet not found! Please install it.");
+		}
+	};
+
 	return (
 		<div>
-		
+			<h1>Solana Phantom Wallet Connection</h1>
+			{walletAddress ? (
+				<p>Connected: {walletAddress}</p>
+			) : (
+				<button onClick={connectWallet}>Connect Phantom Wallet</button>
+			)}
 		</div>
 	);
 };
 
 export default StorePage;
+
+// const dappEncryptionPublicKey = "";
+// const appUrl = encodeURIComponent("https://your-app-url.com");
+// 	const phantomDeepLink = `https://phantom.app/ul/v1/connect?app_url=${appUrl}
+// 			&dapp_encryption_public_key=${dappEncryptionPublicKey}`;
