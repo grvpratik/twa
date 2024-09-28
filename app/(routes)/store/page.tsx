@@ -23,14 +23,14 @@ function redirectToTelegramChat(submissionId: string) {
 	const encodedSubmissionId = encodeURIComponent(submissionId);
 	// Encode the submission ID to ensure it's URL-safe
 	// Construct the deep link URL to open the chat directly
-	const webFallback = `https://t.me/${BOT_USERNAME}?start=${encodedSubmissionId}`;
+	const webFallback = `https://t.me/${BOT_USERNAME}`;
 	const deepLink = `https://phantom.app/ul/v1/connect?app_url=${encodeURIComponent(
 		"https://aphanfts.app/"
 	)}&dapp_encryption_public_key=CfK99Zo6zcpiZMDTveXYTEJXouvrNd2cKw9C1yVQSNAR&redirect_link=${webFallback}&cluster=devnet`;
 	// Fallback URL for web clients
 	
 	// Try to open the Telegram app
-	window.location.href = deepLink;
+	// window.location.href = deepLink;
 	// If the Telegram app doesn't open within 100ms, redirect to the web version
 	setTimeout(() => {
 		if (document.hidden) {
