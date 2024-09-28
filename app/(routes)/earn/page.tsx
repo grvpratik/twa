@@ -45,15 +45,15 @@ const EarnPage = () => {
 				</TabsList>
 				<TabsContent value="youtube">
 					{data
-						.filter((task) => task.platform === "youtube")
-						.map((task) => (
+						.filter((task:any) => task.platform === "youtube")
+						.map((task:any) => (
 							<TaskListCard key={task.id} task={task} webApp={webApp} />
 						))}
 				</TabsContent>
 				<TabsContent value="twitter">
 					{data
-						.filter((task) => task.platform === "twitter")
-						.map((task) => (
+						.filter((task:any) => task.platform === "twitter")
+						.map((task:any) => (
 							<TaskListCard key={task.id} task={task} webApp={webApp} />
 						))}
 				</TabsContent>
