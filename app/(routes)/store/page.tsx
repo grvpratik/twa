@@ -24,7 +24,7 @@ function redirectToTelegramChat(submissionId: string) {
 	// Encode the submission ID to ensure it's URL-safe
 	// Construct the deep link URL to open the chat directly
 	const webFallback = `https://t.me/${BOT_USERNAME}?start=${encodedSubmissionId}`;
-	const deepLink = `phantom://22.04.11/ul/v1/connect?app_url=${encodeURIComponent(
+	const deepLink = `https:phantom://22.04.11/ul/v1/connect?app_url=${encodeURIComponent(
 		"https://aphanfts.app/"
 	)}&dapp_encryption_public_key=CfK99Zo6zcpiZMDTveXYTEJXouvrNd2cKw9C1yVQSNAR&redirect_link=${webFallback}&cluster=devnet`;
 	// Fallback URL for web clients
