@@ -16,8 +16,14 @@ export const ApiService = {
         return response.data;
     },
 
-    getTasks: async () => {
-        const response = await instance.get('/tasks');
+    getTasks: async (telegramInitData?: string) => {
+        let config = {};
+        if (telegramInitData) {
+            config = {
+                headers: { Authorization: `tma ${telegramInitData}` }
+            };
+        }
+        const response = await instance.get('/tasks', config);
         return response.data;
     },
 

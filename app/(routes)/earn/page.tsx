@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ApiService } from "@/action/usefetch";
@@ -10,46 +10,54 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const EarnPage = () => {
 	const { webApp } = useTelegram();
 	console.log({ webApp });
+
 	const { data, error, isLoading } = useQuery({
 		queryKey: ["tasklists"],
-		queryFn: ApiService.getTasks,
+		queryFn: () => ApiService.getTasks(webApp?.initData),
+		enabled: !!webApp?.initData,
 	});
 
 	if (isLoading)
 		return (
 			<div className="w-full flex items-center justify-center h-screen gap-1">
 				<Loader className="animate-spin h-8 w-8" />
-				Loading...
+				<span>Loading...</span>
 			</div>
 		);
 
-	if (error) return <div>Error occurred: {error.message}</div>;
+	if (error)
+		return (
+			<div>
+				Error occurred:{" "}
+				{error instanceof Error ? error.message : "Unknown error"}
+			</div>
+		);
+
+	if (!data) return <div>No tasks available.</div>;
 
 	return (
 		<div className="bg-background relative h-full w-full">
-			<div className="font-bold text-2xl p-2">Tasks</div>
-			<div>
-				<Tabs defaultValue="youtube" className="">
-					<TabsList>
-						<TabsTrigger value="youtube">Youtube</TabsTrigger>
-						<TabsTrigger value="twitter">Twitter</TabsTrigger>
-					</TabsList>
-					<TabsContent value="youtube">
-						{data
-							.filter((task) => task.platform === "youtube")
-							.map((task) => (
-								<TaskListCard key={task.id} task={task} webApp={webApp} />
-							))}
-					</TabsContent>
-					<TabsContent value="twitter">
-						{data
-							.filter((task) => task.platform === "twitter")
-							.map((task) => (
-								<TaskListCard key={task.id} task={task} webApp={webApp} />
-							))}
-					</TabsContent>
-				</Tabs>
-			</div>
+			<h1 className="font-bold text-2xl p-2">Tasks</h1>
+			<Tabs defaultValue="youtube">
+				<TabsList>
+					<TabsTrigger value="youtube">Youtube</TabsTrigger>
+					<TabsTrigger value="twitter">Twitter</TabsTrigger>
+				</TabsList>
+				<TabsContent value="youtube">
+					{data
+						.filter((task) => task.platform === "youtube")
+						.map((task) => (
+							<TaskListCard key={task.id} task={task} webApp={webApp} />
+						))}
+				</TabsContent>
+				<TabsContent value="twitter">
+					{data
+						.filter((task) => task.platform === "twitter")
+						.map((task) => (
+							<TaskListCard key={task.id} task={task} webApp={webApp} />
+						))}
+				</TabsContent>
+			</Tabs>
 		</div>
 	);
 };

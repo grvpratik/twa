@@ -89,25 +89,25 @@ const ProfilePage = () => {
 			<RewardPoints />
 			<div className="my-2 flex items-center justify-center *:flex-1 gap-2">
 				<div className="flex flex-col gap-1 items-center justify-center text-sm">
-					<div className=" w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-gray-200 ">
+					<div className=" w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-gray-600/50 ">
 						<Plus className="size-4" />
 					</div>
 					<span>add</span>{" "}
 				</div>
 				<div className="flex flex-col gap-1 items-center justify-center text-sm">
-					<div className=" w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-gray-200">
+					<div className=" w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-gray-600/50">
 						<ArrowLeftRight className="size-4" />
 					</div>
 					<span>add</span>{" "}
 				</div>
 				<div className="flex flex-col gap-1 items-center justify-center text-sm">
-					<div className=" w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-gray-200">
+					<div className=" w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-gray-600/50">
 						<ArrowUp className="size-4" />
 					</div>
 					<span>add</span>{" "}
 				</div>
 				<div className="flex flex-col gap-1 items-center justify-center text-sm">
-					<div className=" w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-gray-200">
+					<div className=" w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-gray-600/50">
 						<ArrowDown className="size-4" />
 					</div>
 					<span>add</span>{" "}
