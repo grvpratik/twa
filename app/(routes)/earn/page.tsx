@@ -13,7 +13,7 @@ const EarnPage = () => {
 
 	const { data, error, isLoading } = useQuery({
 		queryKey: ["tasklists"],
-		queryFn: () => ApiService.getTasks(webApp?.initData),
+		queryFn: () => ApiService.getTasks(),
 		enabled: !!webApp?.initData,
 	});
 

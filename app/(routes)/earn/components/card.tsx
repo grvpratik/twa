@@ -34,7 +34,7 @@ interface TaskCardProps {
 const TaskListCard = ({ task, webApp }:TaskCardProps) => {
 	
 	const submitTaskMutation = useMutation({
-		mutationFn: () => ApiService.submitTask(task.id, webApp?.initData!),
+		mutationFn: () => ApiService.submitTask(task.id),
 		onSuccess: (data) => {
 			if (data?.status === 201) {
 				toast.success("Submission created");

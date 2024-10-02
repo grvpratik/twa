@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = `${process.env.NEXT_PUBLIC_URL}/v1`;
+const BASE_URL = `${process.env.NEXT_PUBLIC_URL}/v2`;
 
 const instance = axios.create({
     baseURL: BASE_URL,
@@ -16,23 +16,15 @@ export const ApiService = {
         return response.data;
     },
 
-    getTasks: async (telegramInitData?: string) => {
-        let config = {};
-        if (telegramInitData) {
-            config = {
-                headers: { Authorization: `tma ${telegramInitData}` }
-            };
-        }
-        const response = await instance.get('/tasks', config);
+    getTasks: async () => {
+
+        const response = await instance.get('user/task');
         return response.data;
     },
 
-    submitTask: async (taskId: string, initData: string) => {
-        const response = await instance.post(`/user/${taskId}/submit`, null, {
-            headers: {
-                Authorization: `tma ${initData}`
-            }
-        } );
+    submitTask: async (taskId: string) => {
+        const response = await instance.post(`/task/${taskId}/submit`,
+        );
         return response;
     },
 

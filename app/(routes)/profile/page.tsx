@@ -1,3 +1,4 @@
+"use client";
 import RewardPoints from "@/components/Bot/balance";
 import QuestCard from "@/components/Bot/card";
 import EventTimeline from "@/components/Bot/event";
@@ -8,6 +9,9 @@ import { Bird, DiscIcon, TableRowsSplit, TargetIcon } from "lucide-react";
 import React from "react";
 import { ArrowDown, ArrowLeftRight, ArrowUp, Bell, Plus } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useTelegram } from "@/provider/telegram-provider";
+import { useQuery } from "@tanstack/react-query";
+import { ApiService } from "@/action/usefetch";
 
 const events = [
 	{
@@ -38,6 +42,13 @@ const events = [
 	// ... more events
 ];
 const ProfilePage = () => {
+	const { isLoading, error, data, isFetching } = useQuery({
+		queryKey: ["rewardPoints"],
+		queryFn: async() =>await ApiService.getUser(),
+	});
+	console.log(data);
+	if (isLoading || isFetching) return <div>Loading reward points...</div>;
+	if (error) return <div>Error fetching reward points: {error.message}</div>;
 	// const response = await axios.get('http://localhost:8080/v1/user/task');
 	// const res = response.data.tasks;
 
@@ -70,56 +81,54 @@ const ProfilePage = () => {
 	//};
 
 	return (
-		<div className="h-full p-4 flex flex-col gap-2">
+		<div className="h-full p-4 flex flex-col gap-4">
 			<div className="flex justify-between items-center mb-4">
-				<div className="flex items-center gap-1">
-					<Avatar className=" size-8">
+				<div className="flex items-center gap-2">
+					<Avatar className="size-8">
 						<AvatarImage src="https://github.com/shadcn.png" />
 						<AvatarFallback>CN</AvatarFallback>
 					</Avatar>
-					<div className="leading-none text-start flex flex-col">
-						<span className=" text-xs  leading-none">hey,</span>
-						<span className=" text-sm font-bold leading-none">Jane</span>
+					<div className="flex flex-col text-start">
+						<span className="text-xs leading-none">hey,</span>
+						<span className="text-sm font-bold leading-none">{data.user_id}</span>
 					</div>
 				</div>
-				<div className="flex gap-2 items-center">
+				<div className="flex items-center">
 					<Bell className="size-5" />
 				</div>
 			</div>
-			<RewardPoints />
-			<div className="my-2 flex items-center justify-center *:flex-1 gap-2">
-				<div className="flex flex-col gap-1 items-center justify-center text-sm">
-					<div className=" w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-gray-600/50 ">
-						<Plus className="size-4" />
+			{/* <RewardPoints /> */}
+			{/* 
+			<div className="flex items-center justify-center gap-4 mb-4">
+				{["add", "add", "send", "recieve"].map((label, index) => (
+					<div key={index} className="flex flex-col items-center text-sm">
+						<div className="w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-slate-400/50">
+							{index === 0 ? (
+								<Plus className="size-4" />
+							) : index === 1 ? (
+								<ArrowLeftRight className="size-4" />
+							) : index === 2 ? (
+								<ArrowUp className="size-4" />
+							) : (
+								<ArrowDown className="size-4" />
+							)}
+						</div>
+						<span>{label}</span>
 					</div>
-					<span>add</span>{" "}
-				</div>
-				<div className="flex flex-col gap-1 items-center justify-center text-sm">
-					<div className=" w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-gray-600/50">
-						<ArrowLeftRight className="size-4" />
-					</div>
-					<span>add</span>{" "}
-				</div>
-				<div className="flex flex-col gap-1 items-center justify-center text-sm">
-					<div className=" w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-gray-600/50">
-						<ArrowUp className="size-4" />
-					</div>
-					<span>add</span>{" "}
-				</div>
-				<div className="flex flex-col gap-1 items-center justify-center text-sm">
-					<div className=" w-16 h-8 flex items-center justify-center rounded-full overflow-hidden bg-gray-600/50">
-						<ArrowDown className="size-4" />
-					</div>
-					<span>add</span>{" "}
-				</div>
-			</div>
+				))}
+			</div> */}
+
 			<Tabs defaultValue="account" className="w-full">
 				<TabsList className="w-full ">
 					<TabsTrigger value="account">Account</TabsTrigger>
 					<TabsTrigger value="password">Transations</TabsTrigger>
 				</TabsList>
 				<TabsContent value="account">
-					Make changes to your account here.
+					<div className=" flex gap-2 p-2 bg-slate-200 ">
+						<div>icon</div>
+						<div className="flex-1">name</div>
+						<div>connect</div>
+					</div>
 				</TabsContent>
 				<TabsContent value="password">Change your password here.</TabsContent>
 			</Tabs>
